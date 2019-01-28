@@ -1,7 +1,3 @@
-import sys
-import os
-import gc
-import timeit
 import pandas as pd
 import subprocess as subp
 import numpy as np
@@ -12,7 +8,6 @@ import seaborn as sns
 path = 'C:\\Users\\roszk\\PycharmProjects\\julia_sgh\\project\\'
 
 # scripts in other files using one master python file
-path2 = path.replace('/', '\\')
 julia_exec = 'julia '
 julia_file = 'script.jl'
 python_exec = 'python '
@@ -21,8 +16,8 @@ python_file = 'script.py'
 # data preparation
 t0 = time.time()
 data_min = 0
-data_max = 100000
-n = 500000
+data_max = 10000000
+n = 200000000
 
 # create data
 keys = np.random.randint(data_min, data_max, n)
@@ -38,11 +33,10 @@ df.to_csv(path + '/data.csv', index=False, encoding='utf-8')
 t1 = time.time() - t0
 print('Data prepared in {0} seconds'.format(t1))
 
-# a = subp.check_output(str(python_exec + path2 + python_file + ' ' + path2), shell=True)
-# print(a)
-a = subp.check_call(str(python_exec + path2 + python_file + ' ' + path2), shell=True)
+# a = subp.check_output(str(python_exec + path + python_file + ' ' + path), shell=True)
+a = subp.check_call(str(python_exec + path + python_file + ' ' + path), shell=True)
 # b = subp.check_output(str(julia_exec + path.replace('/','\\') + julia_file), shell=True)
-b = subp.check_call(str(julia_exec + path2 + julia_file + ' ' + path2), shell=True)
+b = subp.check_call(str(julia_exec + path + julia_file + ' ' + path), shell=True)
 
 # read results
 results_df = pd.DataFrame()

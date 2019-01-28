@@ -16,8 +16,8 @@ load_time = load_csv_meta[2]
 groupby_time = @elapsed by(df, :key, x -> sum(x[:value]))
 sort_time = @elapsed sort!(df, :key)
 
-
-print("\nResults for Julia script: ");
+# print results
+print("\nResults for Julia script: ")
 print("\nLoad csv execution time: " * string(load_time))
 print("\nGrouping execution time: " * string(groupby_time))
 print("\nSort execution time: " * string(sort_time))
@@ -26,7 +26,6 @@ print("\nSort execution time: " * string(sort_time))
 # save csv ith results
 results = DataFrame(load_time = load_time, groupby_time = groupby_time, sort_time = sort_time)
 
-# results = [string(load_time), string(groupby_time), string(sort_time)]
 CSV.write(path *"output_julia.csv", results)
 
 
