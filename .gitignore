@@ -2,4 +2,3 @@ __init__.py
 data.csv
 output_julia.csv
 output_python.csv
-charts/*
