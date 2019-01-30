@@ -30,7 +30,7 @@ Następnie, powyższe wyniki są wczytywane i dla każdej metryki tworzone są w
 
 
 # Wyniki
-Skrypt został wykonany dla 5 różnych rozmiarów zbioru:
+Skrypt został wykonany dwukrotnie dla 5 różnych rozmiarów zbioru:
 - 500 000,
 - 5 000 000,
 - 50 000 000,
@@ -41,7 +41,7 @@ Nie udało się stworzyć zbioru danych zawierającego 500 milionów wierszy (pr
 
 Wykresy w folderze `/charts` pokazują porównanie czasu wykonania jednej z trzech operacji: ładowania pliku CSV, grupowania oraz sortowania. Jednostką na osi OX są sekundy. Nie uwzględniają czasu kompilacji ani załadowania bibliotek.
 
-W 14 z 15 operacji pakiet `pandas` okazywał się szybszy od `Dataframes`. Jedynie sortowanie 200 milionów wierszy okazało się szybsze w Julii. Największe różnice w wydajności obu rozwiązań widać w operacji ładowania pliku CSV do pamięci. `pandas` był między ~20x a ~5x szybszy dla kolejnych rozmiarów zbioru. W przypadku grupowania danych, różnica między pakietami zmiejszała się wraz ze zwiększaniem zbioru. Różnice na najmniejszym zbiorze sięgały kilkudziesięciokrotności, podczas gdy grupowanie zbioru o rozmiarze 100 milionów wierszy zajęło już niemal tyle samo. Najmniejsze różnice można zauważyć w czasie sortowania. Różnica czasu wykonania spadała systematycznie wraz ze wzrostem rozmiaru zbioru, by przy 200 milionach wierszy okazało się, że `DataFrames` wykonuje operację sortowania nieco szybciej niż `pandas` (528.549s vs. 573.769s).
+W 13 z 15 operacji pakiet `pandas` okazywał się szybszy od `Dataframes`. Jedynie sortowanie 200 milionów wierszy, oraz jedno podejście do grupowania 100 milionów wierszy okazało się szybsze w Julii. Największe różnice w wydajności obu rozwiązań widać w operacji ładowania pliku CSV do pamięci. `pandas` był między ~30x a ~3x szybszy dla kolejnych rozmiarów zbioru. W przypadku grupowania danych, różnica między pakietami zmiejszała się wraz ze zwiększaniem zbioru. Różnice na najmniejszym zbiorze sięgały kilkudziesięciokrotności, podczas gdy grupowanie zbioru o rozmiarze 100 milionów wierszy zajęło już niemal tyle samo. Najmniejsze różnice można zauważyć w czasie sortowania. Różnica czasu wykonania spadała systematycznie wraz ze wzrostem rozmiaru zbioru, by przy 200 milionach wierszy okazało się, że `DataFrames` wykonuje operację sortowania nieco szybciej niż `pandas` (376.298s vs. 508.035s).
 
 Ogólna tendecja wskazuje na to, że im wiekszy rozmiar danych, tym różnice między pakietem `pandas` w Pythonie i `DataFrames` w Julii zmniejszają się. `pandas` radzi sobie o wiele lepiej z mniejszymi zbiorami danych, ale `DataFrames` zaczyna zdobywać przewagę w zbiorach zawierających ponad 200 milionów wierszy.
 
